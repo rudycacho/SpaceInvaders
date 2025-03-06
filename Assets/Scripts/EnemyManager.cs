@@ -5,11 +5,13 @@ public class EnemyManager : MonoBehaviour
     public int enemyColumns = 11;
     public int enemyRows = 5;
     public Vector3 enemyStartPosition = new Vector3(-2.5f, 3.35f, 0);
-    public float enemySpeed = .25f;
+    public float originalEnemySpeed = .25f;
+    public float currentEnemySpeed;
     
     public GameObject topAlien;
     public GameObject midAlien;
     public GameObject bottomAlien;
+    public GameObject specialAlien;
 
     private int enemyTotal;
     private Transform leftmostAlien;
@@ -19,6 +21,7 @@ public class EnemyManager : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        currentEnemySpeed = originalEnemySpeed;
         Enemy.OnEnemyDied += EnemyOnEnemyDied;
         enemyTotal = enemyColumns * enemyRows;
         SpawnAliens();
@@ -34,7 +37,7 @@ public class EnemyManager : MonoBehaviour
     {
         // Enemy Movement
         enemyGroupTransform = this.transform;
-        Vector3 newenemyGroupPosition = enemyGroupTransform.position + new Vector3(enemySpeed * Time.deltaTime, 0f, 0f);
+        Vector3 newenemyGroupPosition = enemyGroupTransform.position + new Vector3(currentEnemySpeed * Time.deltaTime, 0f, 0f);
       
         enemyGroupTransform.position = newenemyGroupPosition;
 
@@ -46,7 +49,7 @@ public class EnemyManager : MonoBehaviour
                 Vector3 newEnemyGroupPosition = enemyGroupTransform.position;
                 newEnemyGroupPosition.y -= .25f;
                 enemyGroupTransform.position = newEnemyGroupPosition;
-                enemySpeed = -enemySpeed;
+                currentEnemySpeed = -currentEnemySpeed;
             }
         }
         if (rightmostAlien != null)
@@ -57,25 +60,26 @@ public class EnemyManager : MonoBehaviour
                 Vector3 newEnemyGroupPosition = enemyGroupTransform.position;
                 newEnemyGroupPosition.y -= .25f;
                 enemyGroupTransform.position = newEnemyGroupPosition;
-                enemySpeed = -enemySpeed;
+                currentEnemySpeed = -currentEnemySpeed;
             }
         }
     }
 
     void SpawnAliens()
     {
-        enemySpeed = Mathf.Abs(enemySpeed);
+        currentEnemySpeed = originalEnemySpeed;
+        currentEnemySpeed = Mathf.Abs(currentEnemySpeed);
         this.transform.position = new Vector3(0, 0, 0);
         GameObject alien;
         Vector3 spawnPosition = enemyStartPosition;
         for (int i = 0; i < enemyRows; i++ )
         {
             // Select alien
-            if (i == 1)
+            if (i == 0)
             {
                 alien = topAlien;
             }
-            else if (i > 4)
+            else if (i <= 2)
             {
                 alien = midAlien;
             }
@@ -93,6 +97,9 @@ public class EnemyManager : MonoBehaviour
             spawnPosition.x = enemyStartPosition.x;
             spawnPosition.y -= .5f;
         }
+        GameObject specialAlien = Instantiate(this.specialAlien, new Vector3(0f,5f,0f), Quaternion.identity);
+        specialAlien.transform.parent = transform;
+        spawnPosition.x += .5f;
         GetFurthestAliens();
     }
     
@@ -108,6 +115,7 @@ public class EnemyManager : MonoBehaviour
         else
         {
             GetFurthestAliens();
+            currentEnemySpeed = currentEnemySpeed * 1.05f;
         }
     }
     

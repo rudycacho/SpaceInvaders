@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
     public TextMeshProUGUI p1ScoreText;
     public TextMeshProUGUI highScoreText;
     
-    private int score;
+    private int score = 0;
+    private int highScore = 0;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -32,5 +33,10 @@ public class GameManager : MonoBehaviour
         }
         newScoreString += scoreString;
         p1ScoreText.text = "Score <1>\n" + newScoreString;
+        if (score > highScore)
+        {
+            highScore = score;
+            highScoreText.text = "HI-SCORE\n" + newScoreString;
+        }
     }
 }

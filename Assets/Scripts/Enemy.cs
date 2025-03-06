@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public int points = 0;
     public delegate void EnemyDied(int points);
     public static event EnemyDied OnEnemyDied;
     // Start is called before the first frame update
@@ -12,7 +13,7 @@ public class Enemy : MonoBehaviour
       Destroy(collision.gameObject);
       Destroy(gameObject);
 
-      OnEnemyDied?.Invoke(3);
+      OnEnemyDied?.Invoke(points);
       
       // todo kill enemy
     }
