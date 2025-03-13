@@ -13,9 +13,11 @@ public class Player : MonoBehaviour
   private GameObject shot;
   private AudioSource audioSource;
   public AudioClip shotSound;
+  public Animator animator;
     // Update is called once per frame
     void Start()
     {
+      animator = GetComponent<Animator>();
       audioSource = GetComponent<AudioSource>();
     }
     void Update()
@@ -42,8 +44,14 @@ public class Player : MonoBehaviour
     void OnCollisionEnter2D(Collision2D collision)
     {
       Destroy(collision.gameObject);
-      Destroy(gameObject);
-
+      animator.Play("Player_Death");
       OnPlayerDied?.Invoke();
+      StartCoroutine(DestroyAfterAnimation());
+    }
+    
+    private IEnumerator DestroyAfterAnimation()
+    {
+      yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+      Destroy(gameObject);
     }
 }

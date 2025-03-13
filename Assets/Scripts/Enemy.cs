@@ -15,13 +15,16 @@ public class Enemy : MonoBehaviour
     private float timer = 0;
     private AudioSource audioSource;
     public AudioClip clip;
+    public Animator animator;
     
     
     public delegate void EnemyDied(int points, bool isUFO);
     public static event EnemyDied OnEnemyDied;
+    private bool isDead = false;
     // Start is called before the first frame update
     void Start()
     {
+        animator = GetComponent<Animator>();
         audioSource = GetComponent<AudioSource>();
         if (isUFO)
         {
@@ -47,12 +50,17 @@ public class Enemy : MonoBehaviour
             }
         }
     }
-    void OnCollisionEnter2D(Collision2D collision)
+    void OnCollisionEnter2D(Collision2D collision) 
     {
-      Destroy(collision.gameObject);
-      Destroy(gameObject);
-
-      OnEnemyDied?.Invoke(points,isUFO);
+        if (!isDead)
+        {
+            isDead = true;
+            GetComponent<BoxCollider2D>().isTrigger = true;
+            Destroy(collision.gameObject);
+            animator.Play("EnemyDestroyed");
+            OnEnemyDied?.Invoke(points,isUFO);
+            StartCoroutine(DestroyAfterAnimation());
+        }
     }
 
     void UFOEvent()
@@ -61,5 +69,11 @@ public class Enemy : MonoBehaviour
         points = 500;
         myRigidbody2D = GetComponent<Rigidbody2D>();
         myRigidbody2D.linearVelocity = Vector2.right * 2; 
+    }
+
+    private IEnumerator DestroyAfterAnimation()
+    {
+        yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length);
+        Destroy(gameObject);
     }
 }

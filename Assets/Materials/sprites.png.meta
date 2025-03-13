@@ -401,7 +401,7 @@ TextureImporter:
         serializedVersion: 2
         x: 20
         y: 81
-        width: 13
+        width: 21
         height: 8
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
@@ -413,28 +413,6 @@ TextureImporter:
       bones: []
       spriteID: 7e3e61f2c701cfe45aa25f5d45765611
       internalID: -1955378958
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spaceinvader sprite_14
-      rect:
-        serializedVersion: 2
-        x: 32
-        y: 81
-        width: 9
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b7c6a1ef263b07748a120dcc207dff5b
-      internalID: 314190687
       vertices: []
       indices: 
       edges: []
@@ -528,28 +506,6 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: spaceinvader sprite_19
-      rect:
-        serializedVersion: 2
-        x: 47
-        y: 61
-        width: 15
-        height: 14
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 97bb2c59736efab46a1c437310dce5b8
-      internalID: -1189383587
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
       name: spaceinvader sprite_20
       rect:
         serializedVersion: 2
@@ -611,50 +567,6 @@ TextureImporter:
       bones: []
       spriteID: 1e532cb01bc5d7444b8d45c974a9f9db
       internalID: 1210967679
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spaceinvader sprite_23
-      rect:
-        serializedVersion: 2
-        x: 31
-        y: 61
-        width: 13
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ac2b4eed5157669419b8d219a6a99770
-      internalID: -167093672
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: spaceinvader sprite_24
-      rect:
-        serializedVersion: 2
-        x: 66
-        y: 61
-        width: 14
-        height: 8
-      alignment: 0
-      pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: ddb35b39809f120498ec3d3b930e4552
-      internalID: -1616569763
       vertices: []
       indices: 
       edges: []

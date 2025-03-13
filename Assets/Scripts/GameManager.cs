@@ -50,6 +50,12 @@ public class GameManager : MonoBehaviour
 
     void PlayerOnPlayerDead()
     {
+        audioSource.PlayOneShot(playerDeath);
+        Invoke("GameOver",2f);
+    }
+
+    void GameOver()
+    {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
