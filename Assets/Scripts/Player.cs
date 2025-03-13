@@ -4,30 +4,27 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+  public delegate void PlayerDied();
+  public static event PlayerDied OnPlayerDied;
   public GameObject bulletPrefab;
   public Transform shottingOffset;
   public float maxSpeed = 1f;
-    // Update is called once per frame
 
+  private GameObject shot;
+  private AudioSource audioSource;
+  public AudioClip shotSound;
+    // Update is called once per frame
     void Start()
     {
-      
+      audioSource = GetComponent<AudioSource>();
     }
-
-    void OnDestroy()
-    {
-      
-    }
-    
     void Update()
     {
-      if (Input.GetKeyDown(KeyCode.Space))
+      if (Input.GetKeyDown(KeyCode.Space) && shot == null)
       {
-        GameObject shot = Instantiate(bulletPrefab, shottingOffset.position, Quaternion.identity);
-        Debug.Log("Bang!");
-
-        Destroy(shot, 3f);
-
+        audioSource.PlayOneShot(shotSound);
+        shot = Instantiate(bulletPrefab, shottingOffset.position, Quaternion.identity);
+        Destroy(shot, 1.5f);
       }
       
     }
@@ -41,5 +38,12 @@ public class Player : MonoBehaviour
       newPlayerPosition.x = Mathf.Clamp(newPlayerPosition.x, -3.5f, 3.5f);
       
       playerTransform.position = newPlayerPosition;
+    }
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+      Destroy(collision.gameObject);
+      Destroy(gameObject);
+
+      OnPlayerDied?.Invoke();
     }
 }

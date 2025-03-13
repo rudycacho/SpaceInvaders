@@ -105,7 +105,7 @@ BoxCollider2D:
     m_Bits: 0
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   m_LayerOverridePriority: 0
   m_ForceSendLayers:
     serializedVersion: 2
@@ -150,6 +150,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 0}
   shottingOffset: {fileID: 8125335893176967482}
   maxSpeed: 1
+  shotSound: {fileID: 0}
 --- !u!1 &6424274885353042238
 GameObject:
   m_ObjectHideFlags: 0
